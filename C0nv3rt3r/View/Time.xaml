@@ -1,0 +1,69 @@
+﻿<cc:AnimatedBasePage
+    x:Class="C0nv3rt3r.Time"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:phone="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone"
+    xmlns:shell="clr-namespace:Microsoft.Phone.Shell;assembly=Microsoft.Phone"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:cc="clr-namespace:Clarity.Phone.Controls"
+    xmlns:toolkit="clr-namespace:Microsoft.Phone.Controls;assembly=Microsoft.Phone.Controls.Toolkit"  
+    xmlns:i="clr-namespace:System.Windows.Interactivity;assembly=System.Windows.Interactivity"
+    xmlns:cmd="clr-namespace:GalaSoft.MvvmLight.Command;assembly=GalaSoft.MvvmLight.Extras.WP71"
+    FontFamily="{StaticResource PhoneFontFamilyNormal}"
+    FontSize="{StaticResource PhoneFontSizeNormal}"
+    Foreground="{StaticResource PhoneForegroundBrush}"
+    SupportedOrientations="Portrait" Orientation="Portrait"
+    mc:Ignorable="d" d:DesignHeight="768" d:DesignWidth="480"
+    shell:SystemTray.IsVisible="True">
+
+    <!--LayoutRoot is the root grid where all page content is placed-->
+    <Grid x:Name="LayoutRoot" Background="Transparent">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="Auto"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        <StackPanel Grid.Row="0">
+            <TextBox Name="textBox1" Text="0" TextAlignment="Right" TextChanged="textBox1_TextChanged" FontSize="{StaticResource PhoneFontSizeExtraExtraLarge}">
+                <TextBox.InputScope>
+                    <InputScope>
+                        <InputScopeName NameValue="Digits"/>
+                    </InputScope>
+                </TextBox.InputScope>
+            </TextBox>
+        </StackPanel>
+        <ListBox Grid.Row="1" x:Name="tileList" Margin="7">
+            <ListBox.ItemsPanel>
+                <ItemsPanelTemplate>
+                    <toolkit:WrapPanel Orientation="Horizontal" />
+                </ItemsPanelTemplate>
+            </ListBox.ItemsPanel>
+            <ListBox.ItemTemplate>
+                <DataTemplate>
+                    <toolkit:HubTile Margin="5" Title="{Binding Title}"
+                            Notification="{Binding Notification}" Message="{Binding Message}"
+                            GroupTag="{Binding GroupTag}" IsFrozen="True" toolkit:TiltEffect.IsTiltEnabled="True" DisplayNotification="True" OpacityMask="Black" Background="{StaticResource PhoneAccentBrush}">
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Tap">
+                                <cmd:EventToCommand Command="{Binding TapCommand}" CommandParameter="{Binding Title}" />
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </toolkit:HubTile>
+                </DataTemplate>
+            </ListBox.ItemTemplate>
+        </ListBox>
+    </Grid>
+ 
+    <!--Sample code showing usage of ApplicationBar-->
+    <!--<phone:PhoneApplicationPage.ApplicationBar>
+        <shell:ApplicationBar IsVisible="True" IsMenuEnabled="True">
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button1.png" Text="Button 1"/>
+            <shell:ApplicationBarIconButton IconUri="/Images/appbar_button2.png" Text="Button 2"/>
+            <shell:ApplicationBar.MenuItems>
+                <shell:ApplicationBarMenuItem Text="MenuItem 1"/>
+                <shell:ApplicationBarMenuItem Text="MenuItem 2"/>
+            </shell:ApplicationBar.MenuItems>
+        </shell:ApplicationBar>
+    </phone:PhoneApplicationPage.ApplicationBar>-->
+
+</cc:AnimatedBasePage>
